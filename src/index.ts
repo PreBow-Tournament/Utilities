@@ -35,5 +35,5 @@ class App extends Client {
     }
 }
 
-const client = new App({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildMessages] }).init();
+const client = new App({ intents: [GatewayIntentBits.Guilds] }).init();
 export default client;
