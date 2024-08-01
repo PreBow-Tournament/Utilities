@@ -1,0 +1,10 @@
+# Dependencies
+node_modules
+
+# Dist
+out
+app.zip
+
+# Misc
+discloud.config
+bot-config.json

@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "discord.js": "^14.15.3",
+    "fs": "^0.0.1-security",
+    "node-fetch": "^3.3.2",
+    "path": "^0.12.7",
+    "tsc": "^2.0.4"
+  },
+  "name": "prebow-tournament",
+  "version": "1.0.0",
+  "description": "Utilities bot",
+  "type": "module",
+  "main": "src/index.ts",
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.3"
+  },
+  "scripts": {
+    "deploy": "ts-node-dev --transpile-only --poll ./src/deploy.ts",
+    "start": "ts-node-dev --respawn --transpile-only --poll ./src/index.ts",
+    "build": "node out/src/index.js"
+  },
+  "author": "TmGL",
+  "license": "ISC"
+}
