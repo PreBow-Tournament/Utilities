@@ -1,22 +1,7 @@
-import { SlashCommandBuilder, SlashCommandOptionsOnlyBuilder, ChatInputCommandInteraction, Collection, RESTPostAPIApplicationCommandsJSONBody, ClientEvents } from 'discord.js';
+import { RESTPostAPIApplicationCommandsJSONBody, Collection } from 'discord.js';
 import fs from 'fs';
 import path from 'path';
-
-interface Command {
-    data: SlashCommandBuilder | SlashCommandOptionsOnlyBuilder;
-    execute: (interaction: ChatInputCommandInteraction) => void;
-}
-
-interface BaseEvent {
-    name: string;
-    once?: boolean;
-    execute: (...args: any[]) => void;
-}
-
-interface Event<ClientEvent extends keyof ClientEvents> extends BaseEvent {
-    name: ClientEvent;
-    execute: (...args: ClientEvents[ClientEvent]) => void;
-}
+import { Command } from '..';
 
 function getCommands(slash: true): RESTPostAPIApplicationCommandsJSONBody[];
 function getCommands(): Collection<string, Command>;
@@ -26,7 +11,7 @@ function getCommands(slash?: boolean): Collection<string, Command> | RESTPostAPI
         results = [];
     } else results = new Collection();
 
-    const commandsPath = path.join(__dirname, 'commands');
+    const commandsPath = path.join(__dirname, '..', '..', 'commands');
     const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.ts'));
 
     for (const file of commandFiles) {
@@ -42,8 +27,4 @@ function getCommands(slash?: boolean): Collection<string, Command> | RESTPostAPI
     return results;
 }
 
-function parseOptions(interaction: ChatInputCommandInteraction): (string | boolean | number | undefined)[] {
-    return interaction.options.data.map(value => value.value);
-}
-
-export { Command, BaseEvent, Event, getCommands, parseOptions };
+export { getCommands };
